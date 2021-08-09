@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        body {
+        background-color: #ffffff;
+    }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+        <div style="min-height: 1000px;">
+        <main>
+        {% block main %}
+            {% include "flash.html" %}
+            {% block page_header %}{% endblock %}
+            <div class="container col-lg-3"> {% block leftblock %}{% endblock %}</div>
+            <div class="container col-lg-6"> {% block page_content %}{% endblock %}</div>
+{#                        <div style="min-height: 1000px"></div>#}
+        {% endblock %}
+        </main>
+
+        </div>
+{#        <div class="container col-lg-12">#}
+        {% block footer %}{% include "footer.html" %}{% endblock %}
+{#        </div>#}
+{% endblock %}
+
+

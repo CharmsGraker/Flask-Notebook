@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block page_content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="{{ url_for('profile.my_document') }}#collapseFour">返回</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+                <h1>大三上学期补修课程</h1>
+            <table class="table table-striped table-bordered table-hover">
+                <tr><td>学科</td><td>学分</td><td>补修学期</td></tr>
+                {% for subject in make_up_courses_5 %}
+                    <tr>
+                        <td>{{ subject[0] }}</td><td>{{ subject[1] }}</td><td>5</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <p>合计补修学分:13分。</p>
+        </div>
+
+        <div class="col-lg-6 ">
+                <h1>大三下学期补修课程</h1>
+
+            <table class="table table-striped table-bordered table-hover">
+                <tr><td>学科</td><td>学分</td><td>补修学期</td></tr>
+                {% for subject in make_up_courses_6 %}
+                    <tr>
+                        <td>{{ subject[0] }}</td><td>{{ subject[1] }}</td><td>6</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        <p>合计补修学分:10.5分</p>
+        </div>
+
+    </div>
+
+    <div class="row">
+    <div class="col-lg-12">
+            <h3>上下学期补修课程学分共计23.5分。</h3>
+
+    </div>
+
+    </div>
+{% endblock %}

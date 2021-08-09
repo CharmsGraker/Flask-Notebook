@@ -1,0 +1,6 @@
+致{{ user.username }}，
+    感谢注册Notebook账号。
+    请点击下方的链接完成您的账号激活:
+    {{ url_for('auth.confirm',token=token,_external=True)  }}
+Notebook团队: CharmsGraker
+PS:此为自动邮件，请勿回复

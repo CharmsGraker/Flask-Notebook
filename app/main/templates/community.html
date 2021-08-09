@@ -1,0 +1,95 @@
+{% extends "divide_card_abstract.html" %}
+{% import "macros.html" as macro %}
+{% block head %}
+    {{ super() }}
+    <script>$('#example').popover(options)</script>
+{% endblock %}
+
+{% block title %}Notebook|社区{% endblock %}
+
+{% block styles %}
+    <style>
+        .media {
+            transform: scale(1.0);
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .media:hover{
+            transform: scale(1.02);
+            cursor:pointer;
+            border-radius: 2.5px;
+            {#background-color: #f0f0f0;#}
+            border-color: #ffc75f;
+              outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+    </style>
+{% endblock %}
+{% block replace_tab_1 %}active{% endblock %}
+
+{% block tab %}
+    <div class=" row page-header">
+        <div class="">
+            {% if current_user.is_authenticated %}
+            <div class="col-lg-2"> <img class="img-responsive" src="{{ current_user.gravatar(126) }}"></div>
+            <div class="col-lg-8"><h1 style="font-weight: bold">Hello,{{ current_user.username }}</h1>
+            {% else %}
+                <div class="col-lg-10"> <h1>你好，陌生人</h1></div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-9">
+            {% if current_user.can(Permission.WRITE_ARTICLES) %}
+            <form action="" method="post" id="form">
+                <div class="form-group">
+                    <label class="control-label" for="{{ form.body.short_name }}" >{{ form.body.label }}</label>
+                    <textarea rows="7" class="form-control" name="{{ form.body.short_name }}" placeholder="畅所欲言" value="{{ form.body.data }}"></textarea>
+                </div>
+                    <button class="btn btn-info pull-right" type="submit">发表</button>
+            </form>
+
+            {% else %}
+                {% set anoy="disabled" %}
+                <div class="form-group">
+                    <label class="control-label" for="{{ form.body.short_name }}" >{{ form.body.label }}</label>
+                    <a name="{{ form.body.short_name }}" class="btn btn-link" href="{{ url_for('auth.login') }} ">前去登录</a>
+
+                    <textarea rows="7" class="form-control" name="{{ form.body.short_name }}" placeholder="登录之后才能发布评论噢" disabled></textarea>
+                </div>
+                <button class="btn btn-info pull-right {{ anoy }}" type="submit">发表</button>
+
+             {% endif %}
+            <br>
+            <div class="form-group"></div>
+            <ul class="nav nav-tabs">
+				<li class="{% if not show_followed %}active{% endif %}">
+					<a  href="{{ url_for('main.show_all') }}">全部</a>
+				</li>
+				<li class="{% if show_followed %}active{% endif %}{{ anoy }}">
+					<a href="{{ url_for('main.show_followed') }}"  >我的关注</a>
+				</li>
+				<li class="disabled">
+					<a  href="#">更多</a>
+				</li>
+			</ul>
+            <div class="tab-content">
+                <br>
+
+                {% include "_posts.html" %}
+
+                {% if show_followed and not pagination.items %}
+                <h1>你还没有关注过哦</h1>
+                {% else %}
+                <div class="pagination" style="align-items: center">
+                    {{ macro.pagination_widget(pagination,'.community') }}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

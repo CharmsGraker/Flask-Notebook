@@ -1,0 +1,37 @@
+{% extends "auth_templates.html" %}
+{% from "macros.html" import form_renderField %}
+
+{% block page_content%}
+    <div class="row">
+        <div class="page-header">
+            <h1 class="text-center">修改档案。</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% block page_header %}
+               <div class="page-header col-lg-offset-3">
+                        <div class="col-lg-2 ">
+                            <img class="img-responsive img-rounded profile-thumbnail"src="{{ current_user.gravatar(size=2560) }}">
+                        </div>
+                        <div class="col-lg-4">
+                            <form action="" method="post" id="form">
+                                {{ form_renderField(form.email,value=form.email.data) }}
+                                {{ form_renderField(form.username,value=form.username.data) }}
+                                <button class="btn btn-primary">更改</button>
+                                <a class="btn btn-default" href="#" onclick="javascript :history.back(-1);">返回</a>
+                            </form>
+                        </div>
+               </div>
+        {% endblock %}
+    </div>
+{#    <div class="row">#}
+{#        <div class="col-lg-3">#}
+{#            <form action="" method="post" id="form">#}
+{#                {{ form_renderField(form.email,value=form.email.data) }}#}
+{#                {{ form_renderField(form.username,value=form.username.data) }}#}
+{#                <button class="btn btn-primary">更改</button>#}
+{#                <a class="btn btn-default" href="#" onclick="javascript :history.back(-1);">返回</a>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}

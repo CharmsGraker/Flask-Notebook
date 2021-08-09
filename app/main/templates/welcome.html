@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).ready(function(){
+
+                {#$("#div1").fadeIn();#}
+                {#$("#div2").fadeIn("slow");#}
+                $("#t").fadeIn(3000);
+
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h1 id="t" style="font-weight: bold">欢迎</h1>
+            <blockquote>
+                <p>
+                你们所有的时光都是在天空鼓翼、从一个自我飞向另一个自我的翅膀。<br>
+                在虔敬中，你们不可能升腾得比你们的成就更高，也不可能跌落得比你们的失败更低。<br>
+                死亡只有当你们在沉默之水中取饮，你们才真正歌唱。<br>
+                只有当你们到达山顶，你们才真正开始攀登。 <br>
+                只有当你们的肢体被大地占有， 你们才真正起舞。
+                </p>
+                <small class="pull-right"><cite>《沙与沫》</cite></small>
+            </blockquote>
+
+        <a class="btn btn-lg btn-primary" href="{{ url_for('main.community') }}">进入社区</a>
+        <a class="btn btn-lg btn-warning" href="{{ url_for('profile.my_document') }}">关于我</a>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

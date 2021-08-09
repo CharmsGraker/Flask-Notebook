@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+    <script>$(function () {
+		$('#myTab li:eq(1) a').tab('show');
+	});
+    </script>
+{% endblock %}
+{% block content %}
+    {% include "flash.html" %}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 tabbable">
+            <ul class="nav nav-tabs">
+				<li class="{% block replace_tab_1 %}{% endblock %}">
+					<a data-toggle="tooltip" title="多人互动讨论" href="{{ url_for('main.community') }}">
+                        <i class="glyphicon glyphicon-home"></i> 社区
+                    </a>
+				</li>
+            {% if current_user.is_authenticated %}
+                <li class="{% block replace_tab_2 %}{% endblock %}">
+                    <a data-toggle="tooltip" title="在线笔记记录" href="{{ url_for('users.dashboard') }}">
+                        <i class="glyphicon glyphicon-edit"></i> 我的笔记</a>
+                </li>
+                <li class="{% block replace_tab_3 %}{% endblock %}">
+                    <a data-toggle="tooltip" title="来看看自己都说了啥~" href="{{ url_for('users.my_post',user_id=current_user.id) }}">
+                        <i class="glyphicon glyphicon-comment"></i> 我的留言</a>
+                </li>
+                <li class="disabled">
+					<a href="#">信息</a>
+				</li>
+				<li class="dropdown pull-right">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">下拉<strong class="caret"></strong></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">操作</a>
+						</li>
+						<li>
+							<a href="#">设置栏目</a>
+						</li>
+						<li>
+							<a href="#">更多设置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">分割线</a>
+						</li>
+					</ul>
+				</li>
+                {% endif %}
+			</ul>
+{#            <div class="tab-content">#}
+{#                <div class="tab-pane active" id="tab1">#}
+{#                    {% block tab1 %}{% endblock %}#}
+{#                </div>#}
+{#                <div class="tab-pane" id="tab2">#}
+{#                    {% block tab2 %}{% endblock %}#}
+{#                </div>#}
+{#            </div>#}
+           <div class="tab-content">
+                {% block tab %}{% endblock %}
+           </div>
+        </div>
+    </div>
+    {% block footer %}{{ super() }}{% endblock %}
+{% endblock %}

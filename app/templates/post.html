@@ -1,0 +1,26 @@
+{% extends "community.html" %}
+{% from "macros.html" import form_renderTextAreaField %}
+{% block title %}Flasky -Post{% endblock %}
+
+{% block tab %}
+    <div class="page-header">
+        <a href="#">返回</a>
+    </div>
+    {% include "_posts.html" %}
+
+    <div class="page-header" id="Comments">
+        <h2 >评论详情</h2>
+    </div>
+    {% include "_comments.html" %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form  action="" method="post" id="form">
+
+                {{ form_renderTextAreaField(form.body,value=form.body.data,rows=3) }}
+                <button class="btn btn-primary">发布</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+<footer class="footer">
+         <div class="container">
+                <div class="row">
+            <div class="footer-col">
+                <h4>About Me</h4>
+                <ul>
+                    <li><a href="{{ url_for('profile.my_document') }}">我的介绍</a> </li>
+                </ul>
+            </div>
+            <div class="footer-col">
+            <h4>Community</h4>
+            <ul>
+                <li><a href="{{ url_for('main.community') }}">Discuss</a> </li>
+                {% if current_user.is_authetnicated %}<li><a href="{{ url_for('main._user',user_id=current_user.id) }}">My Account</a> </li>
+                <li><a href="#">My Comments</a> </li>
+                {% endif %}
+            </ul>
+            </div>
+                    <div class="footer-col">
+            <h4>Auth</h4>
+            <ul>
+                <li><a href="{{ url_for('auth.login') }}">Login</a> </li>
+                <li><a href="{{ url_for('auth.register') }}">Register</a> </li>
+            </ul>
+            </div>
+                    <div class="footer-col">
+{#            <h4>None</h4>#}
+{#            <ul>#}
+{#                <li><a href="#">buttonA</a> </li>#}
+{#                <li><a href="#">buttonB</a> </li>#}
+{#                <li><a href="#">buttonC</a> </li>#}
+{#            </ul>#}
+{#            </div>#}
+        </div>
+            </div>
+</footer>

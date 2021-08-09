@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+     <style>
+         .prettyprint ol.linenums > li { list-style-type: decimal; };
+         @media print {
+             pre.prettyprint { background-color: none }
+             pre .str, code .str { color: #060 }
+             pre .kwd, code .kwd { color: #006; font-weight: bold }
+             pre .com, code .com { color: #600; font-style: italic }
+             pre .typ, code .typ { color: #404; font-weight: bold }
+             pre .lit, code .lit { color: #044 }
+             pre .pun, code .pun { color: #440 }
+             pre .pln, code .pln { color: #000 }
+             pre.tag, code .tag { color: #006; font-weight: bold }
+             pre .atn, code .atn { color: #404 }
+             pre .atv, code .atv { color: #060 }
+         }
+     </style>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+{% endblock %}
+
+{% block content %}
+{% block page_content %}
+    <div class="row">
+        <div class="col-lg-offset-3 col-lg-6">
+                <div class="page-header">
+                    <h1>代码</h1>                <a class="btn btn-default" href="{{ url_for('profile.my_document') }}">返回我的介绍</a>
+
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#RedBlackTree_cpp" data-toggle="tab">RedBlackTree.cpp</a>
+                    </li>
+                    <li>
+                        <a href="#RedBlackTree_h" data-toggle="tab">RedBlackTree.h</a>
+                    </li>
+			    </ul>
+            <div class="tab-content">
+                 <div class="tab-pane active" id="RedBlackTree_cpp">
+                     <br>
+                     <p>对头文件里的方法进行了实现。</p>
+                    <pre class="prettyprint lang-cpp linenums">{% include"RedBlackTree_cpp.html" %}</pre>
+                 </div>
+                <div class="tab-pane" id="RedBlackTree_h">
+                    <br>
+                    <p>在此声明所有会用到的方法。</p>
+                    <pre class="prettyprint linenums">{% include"RedBlackTree_h.html" %}</pre>
+                 </div>
+           </div>
+        </div>
+    </div>
+{% endblock %}
+{% endblock %}

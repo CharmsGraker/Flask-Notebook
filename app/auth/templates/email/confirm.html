@@ -1,0 +1,25 @@
+{% extends "email/unconfirmed.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+            {% block page_header %}
+                    <h1 style="font-weight: bold">致{{ user.username }}，</h1>
+            {% endblock %}
+            </div>
+            {% block page_content %}
+                <p class="lead">感谢注册Notebook账号。请点击下方的链接完成您的账号激活:<br>
+                    {{ token }}
+                    <a href="{{ url_for('auth.confirm',token=token,_external=True) }}">{{ url_for('auth.confirm',token=token,_external=True)  }}</a>
+                </p>
+            {% endblock %}
+        </div>
+        <div class="row">
+            <div class="footer">
+             <h3>Notebook团队: CharmsGraker</h3>
+            <cite>PS:此为自动邮件，请勿回复</cite>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

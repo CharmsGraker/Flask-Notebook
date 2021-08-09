@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "macros.html" as macro %}
+{% block title %}Notebook|评论管理{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1><i class="glyphicon glyphicon-comment"></i> 言论管理</h1>
+    </div>
+    {% set moderate = True %}
+    <!--渲染评论-->
+    {% if not comments %}
+        <p>还没有用户对留言发表过评论。</p>
+    {% else %}
+        {% include "_comments.html" %}
+
+        {% if pagination %}
+            <div class="pagination">
+                {{ macro.pagination_widget(pagination, '.moderate') }}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

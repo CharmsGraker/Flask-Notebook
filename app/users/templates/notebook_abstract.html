@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "divide_card_abstract.html" %}
+{% block title %}控制台{% endblock %}
+{% block replace_tab_2 %}active{% endblock %}
+{% block tab %}
+        {% block page_header %}{% endblock %}
+        {% block mainbody %}
+            {% block navagator %}{% endblock %}
+
+            {% block header %}
+                {% block article_header %}
+                    {% block article_title %}{% endblock %}
+                {% endblock %}
+            {% endblock %}
+            {% block article_content %}{% endblock %}
+
+            {% block articles_list %}
+                    {% block main_table %}{% endblock %}
+            {% endblock %}
+        {% endblock %}
+{% endblock %}
+{% block scripts %}{{ super() }}{% endblock %}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html style="overflow-x:hidden;overflow-y:scroll;">
+{% extends "bootstrap/base.html" %}
+<!--layout只含block，不含实现，base提供一些基础块，若不满意，应该从layout继承重新实现-->
+<head>
+{% block head %}
+    <title>{% block title %}控制台{% endblock %}</title>
+    <!--这三个必须放一起导入-->
+    {% block links %}{% endblock %}
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="./../static/footer.css">
+    <link type="text/css" rel="stylesheet" href="./../static/my_css.css">
+    {% block styles %}
+        <style>
+            .dropdown:hover>.dropdown-menu{
+                display: block;
+            }
+
+            main{
+                padding-bottom: 250px;
+            }
+        </style>
+    {% endblock %}
+    {% block scripts %}
+        {{ super() }}
+        <script>$(function (){$("[data-toggle='tooltip']").tooltip();})</script>
+
+    {{ moment.include_moment() }}
+    {% endblock %}
+{% endblock %}
+</head>
+{#{% block body %}#}
+<body onload="prettyPrint()">
+{% block bodys %}
+            {% block navbar %}
+            <div class="navbar navbar-inverse" role="navigation">
+                <div class="container">
+                    <!--导航栏样式-->
+                    <div class="row">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle"
+                            data-toggle = "collapse" data-target =".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a data-toggle="tooltip" title="关于我们" class="navbar-brand" href="{{ url_for('main.about_us') }}" >Notebook</a>
+                        </div>
+
+                    <!--导航条的Home栏-->
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="/">首页</a></li>
+                                    <li>{% block button2 %}{% endblock %}</li>
+                                    <li><a href="{{ url_for('main.community') }}" >社区</a></li>
+                                    {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+                                        <li><a href="{{ url_for('main.moderate') }}">管理评论</a> </li>
+                                    {% endif %}
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    {% if current_user.is_authenticated %}
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="#"><img class="img-rounded profile-thumbnail" src="{{ current_user.gravatar(24) }}">
+                                            {{ current_user.username }}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ url_for('main._user',user_id=current_user.id) }}"><i class="glyphicon glyphicon-tag"></i> 我的主页</a></li>
+                                            <li><a href="{{ url_for('users.dashboard') }}"><i class="glyphicon glyphicon-edit"></i> 我的笔记</a></li>
+                                            <li><a href="{{ url_for('main.followed_by',user_id=current_user.id) }}"><i class="glyphicon glyphicon-user"></i> 我的关注</a> </li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ url_for('main.modify_user_info',user_id=current_user.id) }}"><i class="glyphicon glyphicon-file"></i> 账号信息</a> </li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ url_for('auth.register') }}"><i class="glyphicon glyphicon-registration-mark"></i> 注册账号</a> </li>
+                                            <li>
+                                                <a href="#" data-toggle="modal" data-target="#logOut"><i class="glyphicon glyphicon-log-out"></i>注销</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    {% else %}
+                                    <li ><a  href="{{ url_for('auth.login') }}">登录</a></li>
+                                    <li ><a href="{{ url_for('auth.register') }}">注册</a></li>
+                                    {% endif %}
+                                </ul>
+                                <div class="modal fade" id="logOut" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class= "modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">注销用户</h4>
+                                            </div>
+                                            <div class="modal-body">退出登录？</div>
+                                            <div class="modal-footer">
+                                                <a href="{{ url_for('auth.logout') }}" class="btn btn-danger" >退出</a>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal -->
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+
+    {% block content %}
+        <div class="container" style="min-height: 700px;padding-bottom:250px">
+        <main>
+        {% block main %}
+            {% include "flash.html" %}
+            {% block page_header %}{% endblock %}
+            {% block leftblock %}{% endblock %}
+            {% block page_content %}{% endblock %}
+{#                        <div style="min-height: 1000px"></div>#}
+        {% endblock %}
+        </main>
+
+        </div>
+        {% block footer %}{% include "footer.html" %}{% endblock %}
+
+    {% endblock %}
+{% endblock %}
+</body>
+{#{% endblock %}#}
+
+</html>

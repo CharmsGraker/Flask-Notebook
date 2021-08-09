@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+
+{% block title %}关于我{% endblock %}
+
+{% block links %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="./../static/my_css.css">
+{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .box {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            width: 800px;
+            max-width:100%;
+        }
+        .square {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 50px;
+            max-width:100%;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            display: flex;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            width: 800px;
+            max-width:100%;
+        }
+        div.sticky{
+            position: -webkit-sticky;
+            position: sticky;
+            top:50px;
+        }
+        .box_ele{
+            padding: 30px 40px;
+        }
+        body{
+            background-image: var(--gradient);
+            background-size: 400%;
+            animation: bg-animation 5s infinite alternate;
+        }
+        .expand {
+            transform: scale(1.0);
+            transition: transform 0.1s ease-out;
+        }
+        .expand:hover{
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in;
+        }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).ready(function(){
+                $(function () { $("[data-toggle='popover']").popover({trigger:'hover',html: true,container:'body'}); }
+                )
+        });
+
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>
+{% endblock %}
+
+
+{% block leftblock %}
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="pull-right  square sticky expand">
+                <a href="#" onclick="javascript :history.back(-1);"
+               style="text-decoration: none;color: black;">返回</a>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block page_content %}
+    <div>
+        <div class="card expand">
+        <div class=" box_ele">
+            <div class="media">
+                <div class="col-lg-3 media-left">
+                    <h1 style="font-weight: bold">
+                    <a style="
+                             text-decoration: none;
+                            -webkit-tap-highlight-color:transparent;
+                    color: #333333"
+                        data-toggle="popover"
+                       data-title="联系方式"
+                       data-content="
+                        <p>
+                        电话: 131 0892 1252<br>
+                        QQ: 845919088</p>">严国瑞</a>
+                </h1>
+                </div>
+                <div class="media-body">
+                    <h4>学院信息： 重庆邮电大学理学院</h4>
+                    <p>专业信息：2019级信息与计算科学</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 5px 20px"></div>
+    <div class="box expand">
+        <div class="row box_ele">
+            <p>
+                &emsp;&emsp;老师们好！我叫严国瑞，来自理学院2019级的大二学生。
+                很高兴能有机会站在这里参加面试。我打算从以下三个方面来做个简单的自我介绍。
+            </p>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseOne">
+                                一、相关课程及学业水平情况
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <h1>相关课程及学业水平情况</h1>
+                            <p>
+                                &emsp;&emsp;累计至20201学期， 必修课加权平均成绩82.43，专业排名第7，平均学分绩点3.22，专业排名第7。<br>
+                                &emsp;&emsp;第20201学期的<strong>平均学分绩点3.57</strong>，第20201学期<strong>必修课加权平均成绩87.09</strong>，专业排名第2。<br>
+                                &emsp;&emsp;其中,一些主要学科的成绩如下：
+                        <div class="col-lg-offset-3 col-lg-5 ">
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr><td>学科</td><td>成绩</td></tr>
+                                {% for subject,score in allgrades.items() %}
+                                    <tr>
+                                        <td>{{ subject }}</td><td>{{ score }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo">
+                                二、课余学习
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div>
+                                <h2>
+                                1.弥补计算机课程的差距
+                            </h2>
+                            <p>
+                                &emsp;&emsp;我知道贵院开设的数据结构课程肯定比我现在所学的要更加全面、更加深入。所以我必须得适应计算机专业课程的知识强度。<br>
+                                &emsp;&emsp;红黑树是我很喜欢的一个高级数据结构，因为对于完成红黑树节点的删除操作，将延迟删除的思想发挥到了极致。
+以下我根据导论书实现的红黑树代码：
+                                <blockquote >
+                                    <a target="_blank" href="{{ url_for('profile.coding') }}" data-toggle="tooltip" data-title="查看代码">红黑树C++实现代码</a>
+                                </blockquote>
+                            </div>
+                            <div>
+                                <h2>2.力扣刷题</h2>
+                                <p>
+                                    &emsp;&emsp;单单学习理论知识也是不够的，所以我在寒假的时候，开始在力扣上刷题，现在累计下来通过的题有360道。<br>
+                                    &emsp;&emsp;<strong>其中中等题183/1074道，困难题60/429道。</strong><br>
+                                    &emsp;&emsp;力扣的题目都很经典，比较启发思维。其实很多题对我来说还是很有技巧性，有些题确实很难到无从下手，
+                                    但得益于其完善的体系，我还是慢慢地从这个刷题网站上学习了很多。
+                                    比如一些技巧性十足的<a data-toggle="popover"
+              data-placement="left"
+                                   data-content="
+                                   <p>动态规划(Dynamic Programming)、回溯算法(DFS/BFS)、状态压缩、最长递增序列、字符串匹配、用于回文串判断的马拉车<cite>(Manacher)</cite>算法，二分查找、前缀和、二维前缀和、树状数组、最近公共祖先问题</p>">思想与算法。
+                                </a>
+                                </p>
+                                <a class="btn btn-info" target="_blank" href="https://leetcode-cn.com/u/charmsgraker/" title="前往力扣" data-toggle="tooltip">我的力扣主页</a>
+                            </div>
+                            <div>
+                                <h2>3.关于这个网站</h2>
+                                <p>
+                                    &emsp;&emsp;这个网站是我使用Python的Flask框架搭建的，因为没学过系统的网络前置知识，现在功能不太完善。<br>
+                                    &emsp;&emsp;搭建它的时候只会些C++，花了一周的时间突击了Python，学习了HTML的基础，了解了CSS和JavaScript的基础。然后开始跟着书搭建网站。但我现在对于很多概念和关键的协议也没有特别清晰的认识。
+                                    还需要之后的学习去巩固。<a data-toggle="popover"
+                                   data-content="但还需要解决很多安全和性能、交互功能的问题"
+                                                            data-placement="top"
+                                >今后我是想将它部署在网络上，并且把它改进成一个小的社交平台。
+                                </a>
+                                </p>
+                            </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseThree">
+                                三、需要人工智能
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h1>需要人工智能</h1>
+                            <p>
+
+                                &emsp;&emsp;目前我还在阅读(统计)机器学习，配套李航的《统计学习方法》阅读。学习了一些机器学习的算法。 目前在阅读`AdaBo\ost`元方法。我也有一边学习算法，一边用python实现算法。<br>
+
+                                &emsp;&emsp;机器学习算法往往解决的都是NP问题，是一个从无到有的过程。而编程的算法更倾向于优化复杂度。
+                                而我们知道NP问题仅仅靠编程能力在多项式时间内是不可解的。那么有再高的编程技巧也无济于事。<br>
+                                &emsp;&emsp;我渐渐明白人工智能才是未来发展的重要领域。其他的好多问题抽象出来可能都离不开它。我记得有本书里说过，
+                            <blockquote>
+                            对于当代人，写代码已经不是程序员的特色了。
+                            但是如何从海量的数据信息提取、挖掘感兴趣的值，才是我们应当注重解决的。
+                            </blockquote>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseFour">
+                                四、学分转换
+                            </a>
+
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h1>在大三弥补所差的23.5学分</h1>
+                            <p>
+                                &emsp;对比贵院已开设的课程，统计下来有26.5学分需要补修。除去部分课程暂无法补修，需补修23.5学分。<br>
+我个人想通过大三的多余学分来弥补。具体补修方案<br>
+                                <div class="row">
+        <div class="col-lg-6">
+                <h3>大三上学期补修课程</h3>
+            <table class="table table-striped table-bordered table-hover">
+                <tr><td>学科</td><td>学分</td><td>补修学期</td></tr>
+                {% for subject in make_up_courses_5 %}
+                    <tr>
+                        <td>{{ subject[0] }}</td><td>{{ subject[1] }}</td><td>5</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <p>合计补修学分:13分。</p>
+        </div>
+
+        <div class="col-lg-6 ">
+                <h3>大三下学期补修课程</h3>
+
+            <table class="table table-striped table-bordered table-hover">
+                <tr><td>学科</td><td>学分</td><td>补修学期</td></tr>
+                {% for subject in make_up_courses_6 %}
+                    <tr>
+                        <td>{{ subject[0] }}</td><td>{{ subject[1] }}</td><td>6</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        <p>合计补修学分:10.5分</p>
+        </div>
+
+    </div>
+大三上学期补修课程合计13.5分，大三下学期补修课程学分10.5，这样就来弥补所欠缺的23.5学分。
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-group-justified">
+                    <a class="btn btn-primary btn-group-justified" href="{{ url_for('main.index') }}">返回主站</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+{% endblock %}
+{#{% block content %}#}
+{#    {{ super() }}#}
+{#{% endblock %}#}

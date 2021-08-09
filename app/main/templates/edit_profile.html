@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import form_renderField,form_renderTextAreaField %}
+{% block page_header %}
+
+{% endblock %}
+{% block page_content %}
+ <div class="row">
+    <div class="text-center">
+            <h1 style="font-weight: bold">修改你的资料。</h1>
+    </div>
+ </div>
+<div class="row">
+    <div class="col-md-5"></div>
+    <div  class="col-md-3" >
+        <form method="post">
+        {{ form_renderField(form.username,value=form.username.data) }}
+        {{ form_renderField(form.location,value=form.location.data) }}
+        {{ form_renderTextAreaField(form.about_me,value=form.about_me.data) }}
+        <div class="pull-right">
+        <button type="submit" class="pull-right btn btn-primary">提交 </button>
+        <a href="#" onclick="javascript :history.back(-1);" type="button" class="btn btn-default">取消</a>
+        </div>
+        </form>
+
+    </div>
+    <div class="col-md-5"></div>
+
+</div>
+{% endblock %}

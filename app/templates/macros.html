@@ -1,0 +1,50 @@
+{% macro form_renderField(field,input_type='text',placeholder='',value='',validLength=[]) %}
+    <div class="form-group">
+        <label class="control-label" for="{{ field.short_name }}" >{{ field.label }}</label>
+        <input class="form-control" id="{{ field.short_name }}" name="{{ field.short_name  }}" type={{ input_type }}
+                placeholder="{{ placeholder }}" value="{{ value }}"
+        {% if validLength %}
+           data-toggle="popover"
+           data-placement="top"
+           data-content="<p>请输入在{{ validLength[0] }}至{{ validLength[1] }}个字符之间</p>"
+       {% endif %}>
+        <span class="help-block" style="display: none">text</span>
+    </div>
+{% endmacro %}
+
+{% macro form_renderTextAreaField(field,value='',rows=10) %}
+    <div class=" form-group">
+        <label class="control-label" for="{{ field.short_name }}" >{{ field.label }}</label>
+        <textarea rows="{{ rows }}" class="form-control" name="{{ field.short_name }}" >{{ value|striptags }}</textarea>
+        <span class="help-block" style="display: none">text</span>
+    </div>
+{% endmacro %}
+
+{% macro pagination_widget(pagination,endpoint)%}
+    <ul class="pagination">
+        <li{%  if not pagination.has_prev %} class="disabled"{% endif %}>
+        <a href="{% if pagination.has_prev %}
+                {{ url_for(endpoint,page=pagination.page - 1,**kwargs) }}
+                {% else %}#{% endif %}">
+                &laquo;
+        </a>
+        </li>
+    {% for p in pagination.iter_pages() %}
+        {% if p %}
+            <li {% if p == pagination.page %}class="active{% endif %}">
+                <a href="{{ url_for(endpoint,page = p,**kwargs) }}">{{ p }}</a>
+            </li>
+        {% else %}
+            <li class="disabled">
+                <a href="#">&hellip;</a> <!--表示省略号-->
+            </li>
+        {% endif %}
+    {% endfor %}
+        <li {% if not pagination.has_next %}class="disabled"{% endif %}>
+            <a href="{% if pagination.has_next %}{{ url_for(endpoint,page=pagination.page + 1,**kwargs) }}
+               {% else %}#{% endif %}">
+            &raquo;
+            </a>
+        </li>
+    </ul>
+{% endmacro %}

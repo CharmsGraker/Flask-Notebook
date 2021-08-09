@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+{% extends 'notebook_base.html' %}
+
+{% block article_header %}
+<div class="row">
+     <div class="col-lg-4">
+         <form class="form-search " method="POST" action="" id="form">
+                <label class="control-label"  for="search">搜索笔记</label>
+                <div class="input-group">
+                    <input  type="text" class="form-control" placeholder="请输入文章名称">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default">搜索</button>
+                    </span>
+                </div>
+        </form>
+     </div>
+</div>
+<br>
+{% endblock %}
+</html>

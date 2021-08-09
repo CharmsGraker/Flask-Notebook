@@ -1,0 +1,12 @@
+{% extends "add_article.html" %}
+
+{% block page_header %}
+    <div class="page-header">
+        <div class="text-justify">
+        <h1 style="font-weight: bold">编辑笔记。</h1>
+            <a href="{{ url_for('users.dashboard') }}">返回我的笔记</a>
+        </div>
+    </div>
+{% endblock %}
+{% block mainbody %}{{ super() }}{% endblock %}
+{% block scripts %}{{ super() }}{% endblock %}

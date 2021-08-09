@@ -1,0 +1,94 @@
+{% extends "auth_templates.html" %}
+{% from 'macros.html' import form_renderField %}
+
+{% block title %}Notebook|登录{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).ready(function(){
+                $(function () {
+                    $("[data-toggle='popover']").popover({trigger:'hover',html: true});
+                });
+        });
+
+    </script>
+            <script src="static/js/validateForm.js" type="text/javascript" ></script>
+        <script src="static/js/login.js" type="text/javascript" ></script>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .except_form{
+            padding: 30px 40px;
+        }
+        .custom_row{
+            padding: 30px 40px;
+        }
+
+    </style>
+{% endblock %}
+{% block before_auth %}<h4><a class="padding-left" href="#" onclick="javascript :history.back(-1);">返回</a></h4>{% endblock %}
+{#{% block page_header %}<h1>您好！请登录</h1>{% endblock %}#}
+{% block auth_header %}
+    <div class="auth_header">
+        <h1>您好！请登录</h1>
+        <p>登陆账号。</p>
+    </div>
+{% endblock %}
+
+
+
+{% block auth_module %}
+    <div class="form">
+        <div class="row">
+            <div class="col-lg-3">
+                    <p  data-container="body" data-toggle="popover"
+                           title="<h4>可用账号</h4>"
+                           data-placement="right"
+                           data-content="用户名:Nekko <br>
+                           密码:YGR200166">
+                            <i class="glyphicon glyphicon-question-sign"></i>可用账号
+                    </p>
+            </div>
+        </div>
+    <form action="" method="POST" id="form">
+        <fieldset>
+            {{ form_renderField(form.username,placeholder="请输入用户名") }}
+            {{ form_renderField(form.password,placeholder="请输入密码",input_type="password") }}
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="check_1" style="font: caption;font-size: 14px"><input type="checkbox" id="check_1">请保持我登录</label>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <a href={{ url_for('.register')}} class="help-block">还没有账号？点我注册</a>
+                </div>
+            </div>
+
+            <!--按钮组-->
+
+            <div class="row">
+                <div class="col-lg-3"style="padding: 0">
+                    <a class="btn btn-link padding-left" href="{{ url_for('main.index') }}">首页</a>
+                </div>
+                <div class="pull-right col-lg-4">
+                    <div class="control-group">
+                        <div class="control">
+                            <button class=" btn btn-gradient btn-group-justified  "  type="submit">登录</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+{#     {{ wtf.quick_form(form) }}#}
+
+{% endblock %}
+{% block tail_scripts %}
+
+{% endblock %}
+{% block advance %}
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block title %}账户未确认{% endblock %}
+{% block content %}
+    {% block page_header %}
+        <div class="row">
+        <div class="col-lg-offset-3 page-header ">
+            <h1>{{ user.username }},</h1>
+            <h1 style="font-weight: bold">似乎您还没有激活账号。</h1>
+        </div>
+        </div>
+    {% endblock %}
+    {% block page_content %}
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+            <p class="lead">若您想由Notebook提供的服务，请先激活账号。请查看注册时使用的邮箱，您应该已收到了一封电子邮件。</p>
+            <h3>需要新的认证邮件？</h3>
+                <a href="{{ url_for('auth.resend_confirmation') }}">重新发送确认邮件</a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-offset-3 btn-group">
+                <a href="{{ url_for('profile.my_document') }}" class="btn btn-primary">关于我们</a>
+            </div>
+        </div>
+        {% endblock %}
+{% endblock %}
+</html>
