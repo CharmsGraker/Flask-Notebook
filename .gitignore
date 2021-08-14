@@ -182,7 +182,7 @@ fabric.properties
 
 #####################################
 # better not push
-venv
+./venv
 ######################################
 # can not post 
-.env
+./.env

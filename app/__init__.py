@@ -62,12 +62,12 @@ def create_app(config_name):
     from .main import main as main_blueprint
     from .users import users as user_blueprint
     from .auth import auth as auth_blueprint
-    from .profile import  profile as profile_blueprint
+    # from .profile import  profile as profile_blueprint
 
     app.register_blueprint(main_blueprint, url_prefix='/')
     app.register_blueprint(user_blueprint, url_prefix='/users')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
-    app.register_blueprint(profile_blueprint,url_prefix='/profile')
+    # app.register_blueprint(profile_blueprint,url_prefix='/profile')
 
     app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0')
 
