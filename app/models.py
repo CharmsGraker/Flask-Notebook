@@ -279,7 +279,7 @@ class User(UserMixin, db.Model):
             if not user.is_following(user):
                 user.follow(user)
                 db.session.add(user)
-                db.session.commit(user)
+                db.session.commit()
 
 
 class AnonymousUser(AnonymousUserMixin):

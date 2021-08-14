@@ -19,8 +19,8 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')  # 用户名
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')  # 163邮箱客户端授权码，不是登录密码
 
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <845919088@qq.com>'
+    FLASKY_MAIL_SUBJECT_PREFIX = '[Yumira]'
+    FLASKY_MAIL_SENDER = 'Yumira Admin <845919088@qq.com>'
 
     # MAIL_DEFAULT_SENDER = 'xxx@163.com'  # 默认发件人
     MAIL_DEFAULT_SENDER = ('CG', '845919088@qq.com')
