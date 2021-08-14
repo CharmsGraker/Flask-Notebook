@@ -28,15 +28,6 @@ class Config:
     # SSL
     SSL_DISABLE = True
 
-    @staticmethod
-    def init_app(app):
-        # 占位用
-        pass
-
-
-class DevelopmentConfig(Config):
-    DEBUG = True
-
     # 会话相关
     PERMANENT_SESSION_LIFETIME = timedelta(hours=1)
 
@@ -50,6 +41,16 @@ class DevelopmentConfig(Config):
     FLASKY_POSTS_PER_PAGE = 15
     FLASKY_FOLLOWERS_PER_PAGE = 10
     FLASKY_COMMENTS_PER_PAGE = 10
+
+    @staticmethod
+    def init_app(app):
+        # 占位用
+        pass
+
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+
 
 
 class ProductionConfig(Config):
