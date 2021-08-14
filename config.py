@@ -62,12 +62,7 @@ class TestingConfig(Config):
     WTF_CSRF_ENABLED = False
 
 
-config = {
-    'development': DevelopmentConfig,
-    'testing': TestingConfig,
-    'production': ProductionConfig,
-    'default': DevelopmentConfig
-}
+
 
 
 class ProductionConfig(Config):
@@ -120,3 +115,10 @@ class HerokuConfig(ProductionConfig):
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
 
+config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
+    'default': DevelopmentConfig,
+    'heroku': HerokuConfig
+}
