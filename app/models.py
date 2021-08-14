@@ -268,6 +268,19 @@ class User(UserMixin, db.Model):
         }
         return json_user
 
+    @staticmethod
+    def add_self_follows():
+        """
+            用于将所有用户关注自己。
+            只需要执行一次，且不针对个体，故使用static
+        :return:
+        """
+        for user in User.query.all():
+            if not user.is_following(user):
+                user.follow(user)
+                db.session.add(user)
+                db.session.commit(user)
+
 
 class AnonymousUser(AnonymousUserMixin):
     """

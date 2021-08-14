@@ -44,6 +44,10 @@ def create_app(config_name):
     db.init_app(app)
     migrate.init_app(app, db)
 
+    if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
+        from flask_sslify import SSLify
+        sslify = SSLify(app)
+
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'auth.login'
     login_manager.login_message = '请先登录噢 OWO'
@@ -76,6 +80,14 @@ def send_async_mail(app, msg):
 
 
 def send_email(to, subject, template, **kwargs):
+    """
+    此方法实现异步传送邮件
+    :param to:
+    :param subject:
+    :param template:
+    :param kwargs:
+    :return:
+    """
     msg = Message(subject=app.config['FLASKY_MAIL_SUBJECT_PREFIX']+subject,
                   sender=app.config['FLASKY_MAIL_SENDER'], recipients=[to])
     msg.body = render_template(template + '.txt', **kwargs)  # 以传入需要的用户名和token
@@ -83,7 +95,6 @@ def send_email(to, subject, template, **kwargs):
     thr = Thread(target=send_async_mail, args=[app, msg])
     thr.start()
     return thr
-
 
 
 
