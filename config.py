@@ -111,7 +111,7 @@ class HerokuConfig(ProductionConfig):
         app.logger.addHandler(file_handler)
 
         # 处理安全等级，因为反向代理服务器的原因
-        from werkzeug.contrib.fixers import ProxyFix
+        from werkzeug.middleware.proxy_fix import ProxyFix
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
 
