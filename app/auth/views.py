@@ -48,7 +48,7 @@ def resend_confirmation():
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
         return redirect(url_for('main.index'))
-    return render_template('templates/email/unconfirmed.html', user=current_user)
+    return render_template('email/unconfirmed.html', user=current_user)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
