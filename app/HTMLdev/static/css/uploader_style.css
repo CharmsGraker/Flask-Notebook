@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #6990f2;
+}
+.annotation {
+    margin: 0px;
+    align-items: center;
+        text-align: center;
+        flex-direction: column;/*防止并排？一行只显示一个元素。如果设置成column-reverse就会上下互换位置*/
+    background: #e9f0ff;
+    margin-bottom: 10px;
+    list-style: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+}
+.wrapper{
+    /*定义窗口宽度*/
+    width: 430px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 5px;
+}
+.wrapper header{
+    color: #6990f2;
+    font-size: 27px;
+    font-weight: 600;
+    text-align: center;
+}
+.wrapper form{
+    height: 167px;
+    display: flex;
+    margin: 30px 0;
+    /*上下居中*/
+    align-items: center;
+    /*左右居中*/
+    justify-content: center;
+    flex-direction: column;/*防止并排？一行只显示一个元素。如果设置成column-reverse就会上下互换位置*/
+    border-radius: 5px;
+    /*加了之后，就由鼠标点击fileInput位置来接管button可点击范围了*/
+    cursor: pointer;
+    /*有间隔的分割线*/
+    border: 2px dashed #6990f2;
+}
+
+form :where(i,p){
+    color: #6990f2;
+}
+form i{
+    font-size: 50px;
+}
+form p{
+    font-size: 16px;
+    margin-top: 15px;
+}
+/*加浅色背景*/
+section .row{
+    background: #e9f0ff;
+    margin-bottom: 10px;
+    list-style: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+section .row i{
+    font-size: 30px;
+    color: #6990f2;
+}
+
+section .details span{
+    font-size: 14px;
+
+}
+.progress-area .row .content{
+    width: 100%;
+    margin-left: 15px;
+}
+.progress-area .details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*flex-direction: column;*/
+
+}
+
+/*处理进度条样式*/
+/*进度条框*/
+.progress-area .progress-bar{
+    height: 6px;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 4px;
+    border-radius: 30px;
+}
+/*进度条*/
+.progress-area .progress{
+    height: 100%;
+    width: 50%;
+    background: #6990f2;
+    border-radius: inherit;
+}
+
+.uploaded-area{
+    max-height: 150px;
+    overflow-y: scroll;
+}
+.uploaded-area::-webkit-scrollbar{
+    width: 0px;
+}
+.uploaded-area .row .content{
+    display: flex;
+    align-items: center;
+}
+
+.uploaded-area .row .details{
+    display: flex;
+    margin-left: 15px;
+    flex-direction: column;
+}
+.uploaded-area .details .size{
+    font-size: 11px;
+    color: #404040;
+}
+
+.uploaded-area .details .details{
+    font-size: 11px;
+    color: #404040;
+}
+
+.uploaded-area .fa-check{
+    color: #6990f2;
+    font-size: 16px;
+}
+
+

@@ -24,6 +24,7 @@ def index():
     return render_template('index.html')
 
 
+
 @main.route('/community', methods=['GET', 'POST'])
 def community():
     form = PostForm(request.form)

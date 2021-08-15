@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>File uploader</title>
+    <link rel="stylesheet" href="static/css/uploader_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+    {% include "flash.html" %}
+  <div class="wrapper">
+    <header>
+      File uploader JS
+    </header>
+        <form action="#">
+            <input type="file" class="file-input" name="file" hidden>
+            <i class="fa fa-cloud-upload-alt"></i>
+            <p>Browse File to Upload</p>
+        </form>
+        <section class="progress-area">
+{#            <li class="row">#}
+{#                <i class="fa fa-file-alt"></i>#}
+{#                <div class="content">#}
+{#                    <div class="details">#}
+{#                        <span class="name">image_01.png·Uploading</span>#}
+{#                        <span class="percent">50%</span>#}
+{#                    </div>#}
+{#                    <div class="progress-bar">#}
+{#                        <div class="progress"></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+        </section>
+      <section class="uploaded-area">
+{#             <li class="row">#}
+{#                 <div class="content">#}
+{#                     <i class="fa fa-file-alt"></i>#}
+{#                     <div class="details">#}
+{#                         <span class="name">image_01.png·Uploaded</span>#}
+{#                         <span class="size">100 KB</span>#}
+{#                     </div>#}
+{#                 </div>#}
+{#                 <i class="fa fa-check"></i>#}
+{#             </li>#}
+{##}
+      </section>
+
+  </div>
+      <div class="annotation">鼠标滚动查看更多已上传的文件</div>
+
+<script src="static/js/uploader_script.js"></script>
+
+</body>
+</html>

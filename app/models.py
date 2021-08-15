@@ -4,7 +4,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app, request, url_for
 from flask_login import UserMixin, AnonymousUserMixin
 
-
 from datetime import datetime
 from . import db
 from . import login_manager
@@ -12,6 +11,7 @@ from . import login_manager
 import hashlib
 
 from app.exceptions import ValidationError
+
 
 class Permission:
     FOLLOW = 0x01
@@ -22,11 +22,11 @@ class Permission:
 
 
 class Comment(db.Model):
-    __tablename__='comments'
+    __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, index =True, default=datetime.utcnow())
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
@@ -45,10 +45,10 @@ class Post(db.Model):
 
     def to_json(self):
         json_post = {
-            'url': url_for('api.get_post',id=self.id, _external=True),
+            'url': url_for('api.get_post', id=self.id, _external=True),
             'body': self.body,
             'timestamp': self.timestamp,
-            'author': url_for('api.get_user',id=self.author_id, _external=True),
+            'author': url_for('api.get_user', id=self.author_id, _external=True),
             'comments': url_for('api.get_post_comments', id=self.id),
             'comment_count': self.comments.count()
         }
@@ -69,6 +69,14 @@ class Article(db.Model):
     content = db.Column(db.Text)
     create_date = db.Column(db.String(65))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def to_json(self):
+        json_article = {
+            'id': self.id,
+            'title': self.title,
+            'create_time': self.create_date
+        }
+        return json_article
 
 
 class Follow(db.Model):
@@ -242,10 +250,9 @@ class User(UserMixin, db.Model):
         return db.session.query(Post).select_from(Follow).filter_by(follower_id=self.id). \
             join(Post, Follow.followed_id == Post.author_id)
 
-
     def generate_auth_token(self, expiration):
         s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
-        return s.dumps({'id':self.id})
+        return s.dumps({'id': self.id})
 
     @staticmethod
     def verify_auth_token(token):
@@ -258,7 +265,7 @@ class User(UserMixin, db.Model):
 
     def to_json(self):
         json_user = {
-            'url': url_for('api.get_post',id=self.id, _external=True),
+            'url': url_for('api.get_post', id=self.id, _external=True),
             'username': self.username,
             'member_since': self.member_since,
             'last_seen': self.last_seen,
@@ -288,6 +295,7 @@ class AnonymousUser(AnonymousUserMixin):
         匿名用户不拥有Permissionn
         匿名用户也不可能是Administrator
     """
+
     def can(self, permissions):
         return False
 
@@ -301,3 +309,7 @@ login_manager.anonymous_user = AnonymousUser
 @login_manager.user_loader
 def load_users(user_id):
     return User.query.get(int(user_id))
+
+
+# class UploadImage(db.Model):
+#     image = db.Column(db.LargeBinary)
