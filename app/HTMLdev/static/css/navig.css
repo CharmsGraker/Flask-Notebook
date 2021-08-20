@@ -28,6 +28,7 @@ body {
 }
 form .txt_field{
   position: relative;
+  /*下面用来创建线*/
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
 
@@ -56,20 +57,21 @@ form .txt_field{
   position: absolute;
   top: 40px;
   left: 0;
-  width: 100%;
+  width: 0%;
   height: 2px;
   background: #2691d9;
   transition: .5s;
 }
 /*p~ul 选择前面有 <p> 元素的每个 <ul> 元素。*/
-.txt_field input:focus ~label,
-.txt_field input:focus ~label {
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label {
+  /*控制上升高度*/
   top: -5px;
   color: #2691d9;
 }
-.txt_field input:focus ~before,
-.txt_field input:valid ~before {
-  top: -5px;
+/*before来创建伪元素*/
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before {
   width: 100%;
 }
 .pass {

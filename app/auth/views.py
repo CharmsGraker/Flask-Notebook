@@ -17,9 +17,14 @@ def before_request():
     # 拦截去其他网页的访问
     if current_user.is_authenticated:
         current_user.ping()
-        if not current_user.confirmed and request.endpoint[:5] != 'auth.' and request.endpoint != 'static' \
-                and request.endpoint[:7] != 'profile':
+        if not current_user.confirmed and request.endpoint[:5] != 'auth.':
             return redirect(url_for('auth.unconfirmed'))
+
+        # if request.endpoint[:4] == 'dev.':
+        #     if not current_user.is_administrator:
+        #         flash('非法的路由访问', 'warning')
+        #         return redirect(url_for('main.index'))
+
 
 
 @auth.route('/confirm/<token>', methods=['GET'])
@@ -48,23 +53,25 @@ def resend_confirmation():
 def unconfirmed():
     if current_user.is_anonymous or current_user.confirmed:
         return redirect(url_for('main.index'))
-    return render_template('email/unconfirmed.html', user=current_user)
+    return render_template('unconfirmed.html', user=current_user)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('notes.dashboard'))
     form = LoginForm(request.form)
     if request.method == 'POST':
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None:
             if user.verify_password(form.password.data):
-                login_user(user, form.remember_me.data)
-                return redirect(url_for('users.dashboard') or url_for('main.index'))
+                login_user(user, remember=form.remember_me.data)
+                return redirect(url_for('notes.dashboard') or url_for('main.index'))
             else:
                 flash('账号密码错误', 'warning')
         else:
             flash('无效的用户账号，请重试', 'danger')
-    return render_template('login.html', form=form)
+    return render_template('login_v0.1.html', form=form)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -82,7 +89,7 @@ def register():
             send_email(to=user.email, subject='请确认你的Notebook账号', template='email/confirm', user=user, token=token)
 
             flash('我们已向你发送了一封邮件，请确认', 'success')
-            return redirect(url_for('main.index'))
+            return redirect(url_for('finish_register.html'))
     return render_template('register.html', form=form)
 
 
@@ -93,3 +100,8 @@ def logout():
     logout_user()
     flash('您已成功退出', 'warning')
     return redirect(url_for('main.index'))
+
+
+@auth.route('/1')
+def test():
+    return render_template('unconfirmed.html')

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/css/topic.css">
+        <link rel="stylesheet" href="static/css/navbar.css">
+
+</head>
+<body>
+{# 容器#}
+    {% include "navbarUI.html" %}
+    <div class="wrapper">
+        <div class="card">
+            <div class="card-banner">
+                <p class="category-tag popular">Popular</p>
+                <img src="" class="banner-img">
+            </div>
+            <div class="card-body">
+                <p class="blog-hashtag"></p>
+                <h2 class="blog-title"></h2>
+                <p class="blog-description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <div class="card-profile">
+                    <img src="{{ user.gravatar(size=256) }}"class="profile-img">
+                    <div class="card-profile-info">
+                        <h3 class="profile-name">{{ user.username }}</h3>
+                        <p class="profile-followers">{{ user.followers.count() }} Followers</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>

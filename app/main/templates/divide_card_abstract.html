@@ -12,19 +12,19 @@
         <div class="col-lg-8 col-lg-offset-2 tabbable">
             <ul class="nav nav-tabs">
 				<li class="{% block replace_tab_1 %}{% endblock %}">
-					<a data-toggle="tooltip" title="多人互动讨论" href="{{ url_for('main.community') }}">
+					<a data-toggle="tooltip" title="多人互动讨论" href="{{ url_for('community.pool') }}">
                         <i class="glyphicon glyphicon-home"></i> 社区
                     </a>
 				</li>
             {% if current_user.is_authenticated %}
                 <li class="{% block replace_tab_2 %}{% endblock %}">
-                    <a data-toggle="tooltip" title="在线笔记记录" href="{{ url_for('users.dashboard') }}">
+                    <a data-toggle="tooltip" title="在线笔记记录" href="{{ url_for('notes.dashboard') }}">
                         <i class="glyphicon glyphicon-edit"></i> 我的笔记</a>
                 </li>
-                <li class="{% block replace_tab_3 %}{% endblock %}">
-                    <a data-toggle="tooltip" title="来看看自己都说了啥~" href="{{ url_for('users.my_post',user_id=current_user.id) }}">
-                        <i class="glyphicon glyphicon-comment"></i> 我的留言</a>
-                </li>
+{#                <li class="{% block replace_tab_3 %}{% endblock %}">#}
+{#                    <a data-toggle="tooltip" title="来看看自己都说了啥~" href="{{ url_for('notes.my_post',user_id=current_user.id) }}">#}
+{#                        <i class="glyphicon glyphicon-comment"></i> 我的留言</a>#}
+{#                </li>#}
                 <li class="disabled">
 					<a href="#">信息</a>
 				</li>

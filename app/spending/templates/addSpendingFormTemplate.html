@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/SpendingForm.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+</head>
+<body>
+    {% macro renderSpendingForm() %}
+    <div class="wrapper">
+      <header>
+        <h2>新增一条开支</h2>
+      </header>
+        <div class="form-content">
+
+
+        <form>
+
+          <div class="right-bar">
+            <h4>支出</h4>
+            <div class="input-group">
+              <div class="input-box">
+                <input type="text" class="head" placeholder="单位（元）">
+                <i class="fa fa-money icon" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+          <div class="left-bar">
+            <h4>标题</h4>
+            <div class="input-group">
+
+                  <div class="input-box">
+                      <input type="text" class="head" placeholder="取个标题方便以后查看吧">
+                      <i class="fa fa-file-text icon" aria-hidden="true"></i>
+
+
+                  </div>
+                </div>
+          </div>
+
+            <div class="input-group">
+                <div class="input-box">
+                    <h4>标签</h4>
+                    <input type="radio" id="0"class="radio" name="11">
+                    <label for="0" class="tag-outline">标签1</label>
+                    <input type="radio" id="1" class="radio" name="11">
+                    <label for="1" class="tag-outline">标签2</label>
+                    <input type="radio" id="2" class="radio" name="11">
+                    <label for="2" class="tag-outline">标签3</label>
+                    <input type="radio" id="3" class="radio" name="11">
+                    <label for="3" class="tag-outline">标签4</label>
+
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-box">
+                    <h4>内容</h4>
+                    <textarea rows="4"></textarea>
+                </div>
+            </div>
+            <div class="input-group">
+              <div class="input-box">
+                <div class="submit-group">
+                  <input type="submit" class="form-submit"name="" value="创建">
+                </div>
+              </div>
+            </div>
+        </form>
+      </div>
+
+        <div></div>
+    </div>
+    <script type="text/javascript">
+        let tagElements = document.querySelectorAll(".input-box label");
+        let checkTagInput = document.querySelectorAll("input[type='radio']");
+        console.log(tagElements);
+
+
+
+
+        for (let i = 0; i < tagElements.length;i++){
+            let tagElement = tagElements[i];
+            function fadein(){
+                 tagElement.classList.remove('tag-outline');
+                tagElement.classList.add('tag');
+
+            }
+            function fadeout(){
+                tagElement.classList.remove('tag');
+                tagElement.classList.add('tag-outline');
+
+            }
+
+
+            tagElements[i].addEventListener("mouseleave",fadeout);
+            tagElements[i].addEventListener("mouseenter",fadein);
+
+            //tagElement.addEventListener("mouseleave",fadeout);
+            tagElements[i].addEventListener("click",()=>{
+
+                 tagElements[i].removeEventListener("mouseleave",fadeout);
+                tagElements[i].removeEventListener("mouseenter",fadein);
+
+                console.log(checkTagInput[i].checked);
+                if (checkTagInput[i].checked) {
+                    //说明这次点击是想取消
+                    console.log('if checked');
+                    checkTagInput[i].checked = false;
+                    //tagElements[i].classList.add('tag-outline');
+                    //tagElements[i].classList.remove('tag');
+                    tagElements[i].addEventListener("mouseleave",fadeout);
+                    tagElements[i].addEventListener("mouseenter",fadein);
+
+                    for(let j=0; j <checkTagInput.length;++j) {
+                        if (checkTagInput[j].checked) {
+
+                            tagElements[j].classList.remove('tag-outline');
+                            tagElements[j].classList.add('tag');
+
+                            //tagElements[j].removeEventListener("mouseleave",fadeout);
+                            //tagElements[j].removeEventListener("mouseenter",fadein);
+
+                        }
+                    }
+
+
+                } else {
+                    //说明这次点击是想勾选
+                    console.log('else');
+                    for(let j=0; j <checkTagInput.length;++j) {
+                        if (j !== i) {
+
+                            checkTagInput[j].checked = false;
+                           tagElements[j].classList.add('tag-outline');
+                            tagElements[j].classList.remove('tag');
+
+                             //tagElements[j].addEventListener("mouseenter",fadein);
+                            //tagElements[j].addEventListener("mouseleave",fadeout);
+                        }
+                    }
+                    tagElements[i].removeEventListener("mouseleave",fadeout);
+                    tagElements[i].removeEventListener("mouseenter",fadein);
+                    checkTagInput[i].checked = true;
+
+                     tagElements[i].classList.remove('tag-outline');
+                    tagElements[i].classList.add('tag');
+
+                }
+
+            });
+            console.log(checkTagInput[i].checked);
+        }
+    </script>
+    {% endmacro %}
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/css/spendingCost.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/flash.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+</head>
+<body>
+{# 容器#}
+    {% include "navbarUI.html" %}
+    {% include "test_flash.html" %}
+    <div style="margin-top: 80px;">
+        <a href="{{ url_for('spending.insertRecord') }}">添加记账</a>
+        <div class="wrapper">
+        <div class="card">
+            <div class="card-banner">
+                <p class="category-tag popular">Popular</p>
+                <img src="" class="banner-img">
+            </div>
+            <div class="card-body">
+                <p class="blog-hashtag"></p>
+                <h2 class="blog-title"></h2>
+                <p class="blog-description">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                <div class="card-profile">
+                    <img src="{{ user.gravatar(size=256) }}"class="profile-img">
+                    <div class="card-profile-info">
+                        <h3 class="profile-name">{{ user.username }}</h3>
+                        <p class="profile-followers">{{ user.followers.count() }} Followers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    <div class="bottom-card" style="margin-top: 80px;">
+        <header>
+            <h2>今天你剁手了吗</h2>
+        </header>
+        <main>
+            <form action="{{ url_for('spending.insertRecord') }}" id="form" method="POST">
+
+            <span>头图</span>
+            <input type="file" accept=".png,.jpeg,.jpg" name="{{ form.banner_image.short_name }}">
+            <span>标题</span>
+            <input type="text" name="{{ form.title.short_name }}">
+            <span>多少钱鸭</span>
+            <input type="text" name="{{ form.costs.short_name }}">
+            <span>标签</span>
+            <ul>
+                {% for key,value in label.items() %}
+                    <!--为了JS好处理，以key作为id-->
+                    <li id="{{ key }}"><input id="{{ key }}" type="radio" name="sp_tag_check">{{ value }}</li>
+                {% endfor %}
+            </ul>
+            <input type="text" name="{{ form.spending_tag.short_name }}"style="display: none">
+            <span></span>
+            <span>说点啥？</span>
+            <textarea name="{{ form.description.short_name }}"></textarea>
+            <span>记录日期</span>
+            <input type="datetime-local" id="datetime_info" name="{{ form.spending_record_date.short_name }}">
+            <span>公开</span>
+            <input type="checkbox" name="{{ form.public.short_name }}" checked="checked">
+
+            <input type="submit" name="{{ form.submit.short_name }}" value="创建">
+        </form>
+        </main>
+
+    </div>
+    <script>
+        //处理时间=====================================================
+        /*
+         $(document).ready(function () {
+            var time = new Date();
+            var day = ("0" + time.getDate()).slice(-2); //好秀
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var today = time.getFullYear() + "-" + (month) + "-" + (day);
+            $('#datetime_info').val(today);
+        });
+        */
+
+
+         //========================================================
+        let labelCheck = $("input[name='sp_tag_check']");
+        labelCheck.click(function (){
+            let labelInput = $("input[name='spending_tag']");
+            for(let i = 0; i<labelCheck.length; i++){
+                if (labelCheck[i].checked) {
+                    let labelInt = labelCheck[i].id;
+                    labelInput.val(labelInt);
+                }
+            }
+            console.log(labelInput.val());
+        })
+    </script>
+</body>
+</html>

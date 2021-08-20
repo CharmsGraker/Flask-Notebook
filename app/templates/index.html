@@ -1,36 +1,76 @@
-{% extends "auth_templates.html" %}
-{% block title %}Notebook|首页{% endblock %}
 
-{% block styles %}
-    {{ super() }}
-{% endblock %}
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>首页</title>
+        <link rel="stylesheet" href="/static/css/welcome.css">
 
-{% block auth_header %}
-    <div class="auth_header">
-        <h1>您好！初来乍到？</h1>
+        <link rel="stylesheet" href="/static/css/flash.css">
+          <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </head>
+<body>
+    {% include "test_flash.html" %}
+    <div class="showcase">
+        <header>
+            <h2 class="logo">Yumira</h2>
+            <div class="toggle active"><ion-icon name="menu-outline" class="open"></ion-icon></div>
+        </header>
+{#        视频是会占位置的#}
+        <video  src="static/video/家入レオ ShineFull Ver_1080p.mp4" muted loop autoplay></video>
+        <div class="overlay"></div>
+        <div class="text">
+            <h2>Never Stop</h2>
+            <h3>Explore More</h3>
+            <p>What of the cripple who hates dancers?
+
+What of the ox who loves his yoke and deems the elk and deer of the forest stray and vagrant things?
+
+What of the old serpent who cannot shed his skin, and calls all others naked and shameless?
+            </p>
+            <a href="{{ url_for('auth.login') }}">Explore</a>
+        </div>
+{#        <ul class="social">#}
+{#            <li><img src="" alt=""></li>#}
+{#            <li><img src="" alt=""> </li>#}
+{#            <li><img src="" alt=""> </li>#}
+{#        </ul>#}
     </div>
-{% endblock %}
-{% block auth_module %}
-    <div class="form">
-        <fieldset>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>在这里分享属于你的原创笔记。</p>
-                    <a class="btn btn-link" href="{{ url_for('main.about_us') }}" style="padding: 0">关于我</a>
-                </div>
-            </div>
+{#    <div class="menu">#}
+{#        <ul>#}
+{#            <li><a>11111</a></li>#}
+{#            <li><a>11111</a></li>#}
+{#            <li><a>11111</a></li>#}
+{#            <li><a>11111</a></li>#}
+{#            <li><a>11111</a></li>#}
+{#            <li><a>11111</a></li>#}
+{#            <li><a>11111</a></li>#}
+{##}
+{#        </ul>#}
+{#    </div>#}
+{#    <div class="welcome-header">#}
+{#        <h1>您好！初来乍到？</h1>#}
+{#    </div>#}
+{#        <fieldset>#}
+{#            <div class="row">#}
+{#                <div>#}
+{#                    <p>在这里分享属于你的原创笔记。</p>#}
+{#                    <a class="btn btn-link" href="{{ url_for('main.about_us') }}" style="padding: 0">关于我</a>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#                    <div class="control">#}
+{#            <div class="pull-right col-lg-6 form-group">#}
+{#                <div class="row">#}
+{#                    <div class="col-lg-12">#}
+{#                    <a class="btn btn-primary col-lg-5" href="{{ url_for('auth.login') }}" type="submit">登录 </a>#}
+{#                    <a class="btn btn-warning col-lg-offset-1 col-lg-5" href="{{ url_for('auth.register') }}" type="submit">注册</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </fieldset>#}
+</body>
 
-{#                    <div class="control">#}   
-            <div class="pull-right col-lg-6 form-group">
-                <div class="row">
-                    <div class="col-lg-12">
-                    <a class="btn btn-primary col-lg-5" href="{{ url_for('auth.login') }}" type="submit">登录 </a>
-                    <a class="btn btn-warning col-lg-offset-1 col-lg-5" href="{{ url_for('auth.register') }}" type="submit">注册</a>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-    </div>
-{#     {{ wtf.quick_form(form) }}#}
-{% endblock %}
+</html>
+
 

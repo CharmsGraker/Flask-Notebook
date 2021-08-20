@@ -1,0 +1,21 @@
+<nav>
+    <div class="logo"><a href="{{ url_for('main.index') }}">Yumira</a></div>
+    <input type="checkbox" id="click">
+    <label for="click" class="menu-btn">
+        <i class="fa fa-bars"></i>
+    </label>
+    <ul>
+        <li><a href="{{ url_for('main.index') }}">首页</a> </li>
+        <li><a href="{{ url_for('community.pool') }}">社区</a> </li>
+        <li><a href="{{ url_for('spending.index') }}">记账</a> </li>
+        <li><a href="{{ url_for('notes.dashboard') }}">笔记</a> </li>
+        <li><a href="#">帮助</a> </li>
+        {% if current_user.can(Permission.MODERATE_COMMENTS) %}
+            <li><a href="{{ url_for('main.moderate') }}">管理评论</a> </li>
+        {% endif %}
+        <li><a href="{{ url_for('auth.logout') }}">注销</a></li>
+    </ul>
+{#        <ul>#}
+{#        </ul>#}
+</nav>
+

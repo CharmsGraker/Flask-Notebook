@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>登录</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link type="text/css" rel="stylesheet" href="/static/css/flash.css">
+        <link rel="stylesheet" href="static/css/loginUI.css">
+
+    </head>
+<body>
+    {% include "test_flash.html" %}
+    <div class="center">
+
+        <h1>登录</h1>
+        <form action="" method="POST" id="form">
+            <div class="txt_field">
+{#                得指定name才行#}
+                <input class="input-box" type="text" name="{{ form.username.short_name }}" value="" required>
+                <span></span>
+                <label>用户名</label>
+            </div>
+            <div class="txt_field">
+                <input class="input-box" name="{{ form.password.short_name }}" type="password" required>
+                <span></span>
+                <label>密码</label>
+            </div>
+{#            <div class="pass"><a href="#">忘记密码？</a></div>#}
+            <label style="font: caption;font-size: 14px"><input type="checkbox" name="{{ form.remember_me.short_name }}">请保持我登录</label>
+            <input type="submit" class="auth-button" id="button" value="登录">
+            <div class="signup_link">
+                没有账号？<a href="{{ url_for('auth.register') }}">注册</a>
+            </div>
+        </form>
+{#        <div class="return">#}
+{#            <a  href="#" onclick="javascript :history.back(-1);" type="button">返回</a>#}
+{#        </div>#}
+    </div>
+
+
+{#    {% include "buttomResource.html" %}#}
+
+</body>
+</html>

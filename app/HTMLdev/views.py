@@ -34,7 +34,7 @@ def livesearch():
     return jsonify(results)
 
 
-@dev.route('/upload',methods=['GET'])
+@dev.route('/upload', methods=['GET'])
 def upload():
     return render_template('uploader.html')
 
@@ -126,3 +126,13 @@ def reNameFileByRandomly(filename):
     file_extension = os.path.splitext(filename)[1]
     new_filename = uuid.uuid4().hex + file_extension
     return new_filename
+
+
+@dev.route('/topic')
+def topic():
+    return render_template('topicTemplate.html', user=current_user)
+
+
+@dev.route('/note_ui')
+def note():
+    return render_template('dashboard_ui.html')

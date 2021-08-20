@@ -1,0 +1,28 @@
+{% for message in get_flashed_messages(with_categories=True) %}
+{#                   message[0]是类别#}
+    <div class="alert hide">
+        <span class="fa fa-exclamation-circle"></span>
+        <span class="msg">Waring: {{ message[1] }}</span>
+        <span class="close-btn" onclick="clickfun()">
+            <span class="fa fa-times"></span>
+        </span>
+    </div>
+    <script>
+    $('.alert').removeClass('hide');
+    $('.alert').addClass('show');
+    {#$('.alert').addClass('showAlert');#}
+
+    setTimeout(function(){
+        // 添加一定时间后自动消失
+        $('.alert').addClass('hide');
+        $('.alert').removeClass('show');
+    },3000);
+    $('.close-btn').onclick(function (){
+                $('.alert').addClass('hide');
+        $('.alert').removeClass('show');
+    });
+
+
+</script>
+{% endfor %}
+

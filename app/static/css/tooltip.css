@@ -1,0 +1,58 @@
+:root{
+    --orange: #f96d00;
+}
+
+.tooltip-txt~ .my-tooltip-left{
+    white-space:nowrap;
+    position: absolute;
+    left: 320px;
+    display: inline-block;
+    max-width: 500px;
+    top:50%;
+    background: var(--orange);
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 6px;
+    visibility: hidden;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    /*border-radius: 15px;*/
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+.tooltip-txt{
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
+    /*position: relative;*/
+    /*z-index: 2;*/
+}
+
+.tooltip-txt:hover ~ .my-tooltip-left{
+    transform: translateY(-15%) translateX(10px);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tooltip-txt~ .my-tooltip-left:before{
+    position: absolute;
+    content: '';
+    height: 12px;
+    top: 50%;
+    width: 12px;
+    left: -8px;
+    background:  var(--orange);
+    transform:  rotate(45deg)  translateY(-50%);
+    border-radius: 2px;
+}
+
+
+.my-tooltip-left.ErrorAlert {
+    visibility:visible;
+}
+
+
+

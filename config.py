@@ -10,20 +10,20 @@ class Config:
     # 邮箱相关
     FLASKY_ADMIN = os.environ.get('FLASK_ADMIN') or '845919088@qq.com'
 
-    MAIL_SERVER = 'smtp.qq.com'  # 使用的邮箱服务器
-    MAIL_PORT = 25  # 端口   支持SSL一般为465，默认为25
+    MAIL_SERVER = 'smtp.gmail.com'  # 使用的邮箱服务器
+    MAIL_PORT = 465  # 端口   支持SSL一般为465，默认为25
     # MAIL_USE_SSL = True  # 是否支持SSL
     MAIL_USE_TLS = True  # 是否支持TLS
     MAIL_DEBUG = True
 
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')  # 用户名
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')  # 163邮箱客户端授权码，不是登录密码
+    MAIL_USERNAME = 'charmsgraker@gmail.com'#os.environ.get('MAIL_USERNAME')  # 用户名
+    MAIL_PASSWORD = 'mqhinjzyxkccxbkp'#os.environ.get('MAIL_PASSWORD')  # 163邮箱客户端授权码，不是登录密码
 
     FLASKY_MAIL_SUBJECT_PREFIX = '[Yumira]'
-    FLASKY_MAIL_SENDER = 'Yumira Admin <845919088@qq.com>'
+    FLASKY_MAIL_SENDER = 'Yumira Admin <charmsgraker@gmail.com>'
 
     # MAIL_DEFAULT_SENDER = 'xxx@163.com'  # 默认发件人
-    MAIL_DEFAULT_SENDER = ('CG', '845919088@qq.com')
+    MAIL_DEFAULT_SENDER = ('CG', 'charmsgraker@gmail.com')
 
     # SSL
     SSL_DISABLE = True
@@ -42,6 +42,15 @@ class Config:
     FLASKY_FOLLOWERS_PER_PAGE = 10
     FLASKY_COMMENTS_PER_PAGE = 10
 
+    # 文件上传
+    UPLOAD_IMAGE_SAVE_DIR = os.path.join(basedir, 'app', 'upload')
+    ALLOWED_IMAGED_EXT = ['.jpg', '.png', 'jpeg']
+    # 单位：字节Byte
+    ALLOWED_MAX_IMG_SIZE = 5 * 1024 * 1024
+
+    MAX_BANNER_IMG_SIZE = 3 * 1024 * 1024
+
+    SPENDING_LABEL_HASH_DIR = os.path.join(basedir, 'app','spending/persistent/spending_label')
     @staticmethod
     def init_app(app):
         # 占位用

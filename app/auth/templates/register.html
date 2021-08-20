@@ -1,50 +1,94 @@
-{% extends "auth_templates.html" %}
-{% from 'macros.html' import form_renderField %}
-{% block title %}Notebook|注册{% endblock %}
-
-{% block scripts %}
-{{ super() }}
-    <script>
-         $(document).ready(function(){
-                $(function () {
-                    $("[data-toggle='popover']").popover({trigger:'onclick',html: true});
-                });
-        });
-    </script>
-    <script src="static/js/validateForm.js" type="text/javascript" ></script>
-    <script src="static/js/login.js" type="text/javascript" ></script>
-{% endblock %}
-
-{% block page_header %}
-
-{% endblock %}
-{% block before_auth %}<h4><a class="padding-left" href="#" onclick="javascript :history.back(-1);">返回</a></h4>{% endblock %}
-
-
-{% block auth_header %}
-    <div class="auth_header">
-        <h1>创建账号</h1>
-        <p>创建属于你的笔记账号。</p>
-    </div>
-{% endblock %}
-
-{% block auth_module %}
-    <!--自定义配置bootstrap功能按钮-->
-    <form class="form" action="" method="POST" id="form">
-        <fieldset>
-            {{ form_renderField(form.email,placeholder="example@example.com",validLength=[6,35]) }}
-
-            {{ form_renderField(form.username,placeholder="请设置在2至25个字符",validLength=[2,25]) }}
-            {{ form_renderField(form.password,'password', placeholder="请设置在8至16个字符",validLength=[8,16]) }}
-            {{ form_renderField(form.password_confirm,'password',"得跟上面输入的密码一致噢~") }}
-            <div class="pull-right row col-lg-4">
-                <div class="">
-                    <button class="btn btn-gradient btn-group-justified"  type="submit">注册</button>
+{#{% from 'macros.html' import form_renderField %}#}
+{##}
+{#{% block scripts %}#}
+{#{{ super() }}#}
+{#    <script>#}
+{#         $(document).ready(function(){#}
+{#                $(function () {#}
+{#                    $("[data-toggle='popover']").popover({trigger:'onclick',html: true});#}
+{#                });#}
+{#        });#}
+{#    </script>#}
+{#    <script src="static/js/validateForm.js" type="text/javascript" ></script>#}
+{#    <script src="static/js/login.js" type="text/javascript" ></script>#}
+{#{% endblock %}#}
+{##}
+{#{% block page_header %}#}
+{##}
+{#{% endblock %}#}
+{#{% block before_auth %}<h4><a class="padding-left" href="#" onclick="javascript :history.back(-1);">返回</a></h4>{% endblock %}#}
+{##}
+{##}
+{#{% block auth_module %}#}
+{#    <!--自定义配置bootstrap功能按钮-->#}
+{#    <form class="form" action="" method="POST" id="form">#}
+{#        <fieldset>#}
+{#            {{ form_renderField(form.email,placeholder="example@example.com",validLength=[6,35]) }}#}
+{##}
+{#            {{ form_renderField(form.username,placeholder="请设置在2至25个字符",validLength=[2,25]) }}#}
+{#            {{ form_renderField(form.password,'password', placeholder="请设置在8至16个字符",validLength=[8,16]) }}#}
+{#            {{ form_renderField(form.password_confirm,'password',"得跟上面输入的密码一致噢~") }}#}
+{#            <div class="pull-right row col-lg-4">#}
+{#                <div class="">#}
+{#                    <button class="btn btn-gradient btn-group-justified"  type="submit">注册</button>#}
 {#                    <a class="btn btn-default" href="#" onclick="javascript :history.back(-1);" type="button" >返回</a>#}
-                </div>
-            </div>
-        </fieldset>
-    </form>
+{#                </div>#}
+{#            </div>#}
+{#        </fieldset>#}
+{#    </form>#}
+{#{% endblock %}#}
 
-{#         {{ wtf.quick_form(form) }}#}
-{% endblock %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>登录</title>
+{#        {% include "StaticResource.html" %}#}
+        <link rel="stylesheet" href="static/css/loginUI.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+        <link rel="stylesheet" href="/static/css/tooltip.css">
+    </head>
+<body>
+{% include "test_flash.html" %}
+    <div class="center">
+
+        <h1>创建账号</h1>
+        <form action="" method="POST" id="form">
+            <div class="txt_field">
+{#                得指定name才行#}
+                <input class="input-box tooltip-txt" type="text" id="{{ form.email.short_name }}" name="{{ form.email.short_name }}" value="" required>
+                <span></span>
+                <div class="my-tooltip-left">example@example.com</div>
+                <label>电子邮箱</label>
+            </div>
+            <div class="txt_field">
+                <input class="input-box tooltip-txt" type="text" id="{{ form.username.short_name }}" name="{{ form.username.short_name }}" value="" required>
+                <span></span>
+                                <div class="my-tooltip-left">取个好听的名字吧，长度不少于3个字符</div>
+                <label>用户名</label>
+            </div>
+            <div class="txt_field">
+                <input class="input-box tooltip-txt" id="{{ form.password.short_name }}" name="{{ form.password.short_name }}" type="password" required>
+                <span></span>
+                <div class="my-tooltip-left">密码请设置在8至16位</div>
+
+                <label>密码</label>
+            </div>
+             <div class="txt_field">
+                <input class="input-box tooltip-txt" id="{{ form.password_confirm.short_name }}" name="{{ form.password_confirm.short_name }}" type="password" required>
+                <span></span>
+                 <div class="my-tooltip-left">两次输入密码要一样噢</div>
+                <label>请确认密码</label>
+            </div>
+            <input type="submit"class="auth-button-orange" id="button" value="注册">
+            <div class="signup_link black"><a href="{{ url_for('auth.login') }}">返回登录界面</a></div>
+        </form>
+    </div>
+{#    {% include "buttomResource.html" %}#}
+    <script src="static/js/register.js"></script>
+    <script src="static/js/validateFormCustom.js"></script>
+
+</body>
+</html>

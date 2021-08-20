@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "StaticResource.html" %}
+</head>
+<body>
+    {% include "navbarUI.html" %}
+    {% block content %}{% endblock %}
+      {% block footer %}{% include "footer.html" %}{% endblock %}
+</body>
+</html>

@@ -13,6 +13,9 @@ import hashlib
 from app.exceptions import ValidationError
 
 
+from app.spending.models import SpendingRecord
+
+
 class Permission:
     FOLLOW = 0x01
     COMMENT = 0x02
@@ -145,9 +148,12 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+
     writings = db.relationship('Article', backref='author')
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    spendings = db.relationship('SpendingRecord', backref='user',lazy='dynamic')
+
 
     # 关注者属性
     # self关注的用户,为了与书上的一致，这里采用了followed而不是following，那么反向关系就说明self是追随者

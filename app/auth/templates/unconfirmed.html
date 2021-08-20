@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>账户未确认</title>
+        <link type="text/css" rel="stylesheet" href="/static/css/flash.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link type="text/css" rel="stylesheet" href="static/css/navbar.css">
+        <link rel="stylesheet" href="static/css/confirmPage.css">
+    </head>
+    <body>
+        {% include "navbarUI.html" %}
+        <div class="showcase">
+            <header>
+
+            </header>
+            <div class="text">
+                <h2>{{ user.username }},</h2>
+                <h3 style="font-weight: bold">您还没有激活账号。</h3>
+                <p class="lead">若您想使用由Yumira提供的服务，请查看注册时使用的邮箱，您应该已收到了一封可激活账号的电子邮件。</p>
+                <h4>需要新的认证邮件？</h4>
+                <a class="yellow" href="{{ url_for('auth.resend_confirmation') }}">重新发送确认邮件</a>
+            </div>
+        </div>
+    </body>
+</html>

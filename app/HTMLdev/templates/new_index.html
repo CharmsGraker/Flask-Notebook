@@ -8,21 +8,24 @@
 <body>
     <div class="center">
         <h1>登录</h1>
-        <form method="post">
+        <form action="" method="post" id="form">
             <div class="txt_field">
-                <input type="text" name="" value="" required>
+                <input class="input-box" type="text" name="" value="" required>
+                <span></span>
                 <label>用户名</label>
             </div>
             <div class="txt_field">
-                <input type="password" required>
+                <input class="input-box" type="password" required>
+                <span></span>
                 <label>密码</label>
             </div>
             <div class="pass">忘记密码？</div>
             <input type="submit" value="登录">
             <div class="signup_link">
-                没有账号？<a href="#">注册</a>
+                没有账号？<a href="{{ url_for('auth.register') }}">注册</a>
             </div>
         </form>
     </div>
+
 </body>
 </html>
